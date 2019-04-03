@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import {FlatList} from 'react-native';
+import {FlatList,Text} from 'react-native';
 import {connect} from 'react-redux';
 import ListItem from './ListItem';
 
 
 
 class LibraryList extends Component {
+
+
     
     renderItem(library){
-        return <ListItem library={library}/>
+       return <ListItem library={library}/>
     }
 
     render() { 
@@ -16,8 +18,9 @@ class LibraryList extends Component {
         return(
             <FlatList
             data={this.props.libraries}
-            renderItem={this.renderItem}
-            keyExtractor={(library) => library.id}
+            //the {item} is destructed from the renderItem
+            renderItem={({item}) => this.renderItem(item)}
+            keyExtractor={libray => libray.id}
             />
         );
     }
