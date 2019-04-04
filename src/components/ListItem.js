@@ -12,7 +12,8 @@ class ListItem extends Component {
     }
 
     renderDescription(){
-        const{library,selectedLibraryId,expanded} = this.props;
+        
+        const{library,expanded} = this.props;
         if(expanded){
             return(
                 <CardSection>
@@ -31,6 +32,10 @@ class ListItem extends Component {
         
         return ( 
             <TouchableWithoutFeedback 
+            /*the id is destructed from the library props and passed to the
+            selectLibrary action which its then set to the selectedLibraryId
+            reducer
+            */
             onPress={()=> this.props.selectLibrary(id)}
             >
                 <View>
@@ -51,6 +56,12 @@ class ListItem extends Component {
  };
 
  const mapStateToProps = (state,ownProps) => {
+     /*The library props comes from the libraryList,
+     the selectedLibraryId comes from the reducer props.
+     Also, the selectedLibraryId is being compared with the library props id
+     to determine where or not the function testing for the expanded condition
+     should conditionally render a component.
+    */
      const expanded = state.selectedLibraryId === ownProps.library.id;
     return { expanded}
  };
